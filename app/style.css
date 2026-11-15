@@ -48,3 +48,7 @@ thead th,.name-cell small,tbody td small,.table-foot{color:#687367}
 .entry-row b{color:#166534}
 .error p{color:#536052}
 footer{color:#687367;border-color:#e3e7df}
+
+/* Official make.fun link alongside the Fieldnotes identity. */
+.header-brands{display:flex;align-items:center;gap:16px;flex:none}.makefun-brand{display:inline-flex;align-items:center;gap:7px;color:#344437;font-size:11px;font-weight:650;white-space:nowrap}.makefun-brand img{width:24px;height:24px;display:block}.makefun-brand:hover{color:#166534}.top{gap:35px}.brand{min-width:218px}
+@media(max-width:760px){.header-brands{gap:9px}.brand{min-width:auto}.makefun-brand{font-size:10px;gap:4px}.makefun-brand img{width:21px;height:21px}.top{gap:8px}}
