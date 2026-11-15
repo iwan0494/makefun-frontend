@@ -8,7 +8,7 @@ function remaining(s){const ms=Date.parse(s)-Date.now();if(ms<=0)return 'CLOSED'
 const live=b=>Number(b.potUsd??b.rewardAmount??0),fee=b=>b.entryFeeUsd==null?'Free':money(b.entryFeeUsd),isOpen=b=>Date.parse(b.deadline)>Date.now();
 function profileLink(handle){return `#/profile/${encodeURIComponent(handle||'niskalaxyz')}`;}
 function breadcrumb(label){return `<div class="crumb"><a href="#/">INDEX</a><span>/</span><span>${esc(label)}</span></div>`;}
-function setTitle(t){document.title=t+' — Fieldnotes';}
+function setTitle(t){document.title=t+' — Make.fun';}
 function renderBoard(){
   const nowOpen=all.filter(isOpen),soon=nowOpen.filter(b=>Date.parse(b.deadline)-Date.now()<48*3600000),pot=nowOpen.reduce((n,b)=>n+live(b),0);
   const filtered=all.filter(b=>filter==='soon'?isOpen(b)&&Date.parse(b.deadline)-Date.now()<72*3600000:filter==='free'?b.entryFeeUsd==null||Number(b.entryFeeUsd)===0:true).filter(b=>`${b.title} ${b.slug} ${b.sponsor?.name||''} ${b.category||''}`.toLowerCase().includes(query.toLowerCase()));

@@ -1,4 +1,4 @@
-# Fieldnotes — make.fun challenge index
+# Make.fun — challenge index
 
 A compact, read-only make.fun frontend for browsing live bounties, inspecting rewards and rules, checking leaderboards, and opening public profiles. Static files are in `app/` and call only make.fun's public GET API.
 
