@@ -1,16 +1,26 @@
 const ROOT='https://make.fun/api';
-const fresh=new Map();
+const memory=new Map();
+const TTL=60_000;
 export async function get(path){
-  const key=ROOT+path, cached=fresh.get(key), now=Date.now();
-  if(cached&&now-cached.at<45000)return cached.value;
-  const headers={Accept:'application/json'};
-  if(cached?.etag)headers['If-None-Match']=cached.etag;
-  const response=await fetch(key,{headers});
-  if(response.status===304&&cached){cached.at=now;return cached.value;}
-  if(!response.ok)throw new Error(`make.fun API returned ${response.status}`);
-  const value=await response.json();fresh.set(key,{value,at:now,etag:response.headers.get('ETag')});return value;
+  const key=ROOT+path, now=Date.now(), cached=memory.get(key);
+  if(cached&&now-cached.time<TTL)return cached.value;
+  try{
+    const res=await fetch(key,{headers:{Accept:'application/json'}});
+    if(!res.ok)throw new Error(`API ${res.status}`);
+    const value=await res.json();memory.set(key,{value,time:now});
+    try{sessionStorage.setItem('fn:'+key,JSON.stringify({time:now,value}));}catch{}
+    return value;
+  }catch(error){
+    if(cached)return cached.value;
+    try{const old=JSON.parse(sessionStorage.getItem('fn:'+key)||'null');if(old?.value)return old.value;}catch{}
+    throw error;
+  }
 }
-export const bounties=()=>get('/competitions?status=open&activity=times');
-export const bounty=slug=>get(`/competitions/${encodeURIComponent(slug)}?submissions=summary`);
-export const leaderboard=slug=>get(`/competitions/${encodeURIComponent(slug)}/leaderboard?rows=first`);
-export const profile=handle=>get(`/profiles/${encodeURIComponent(handle)}`);
+export async function bounties(){
+  let cursor='',all=[],pages=0;
+  do{const q=new URLSearchParams({status:'open',activity:'times',limit:'100'});if(cursor)q.set('cursor',cursor);const data=await get('/competitions?'+q);all.push(...(data.items||[]));cursor=data.next_cursor||'';pages++;}while(cursor&&pages<8);
+  return all;
+}
+export const bounty=slug=>get('/competitions/'+encodeURIComponent(slug)+'?submissions=summary');
+export const leaderboard=slug=>get('/competitions/'+encodeURIComponent(slug)+'/leaderboard?rows=first');
+export const profile=handle=>get('/profiles/'+encodeURIComponent(handle));

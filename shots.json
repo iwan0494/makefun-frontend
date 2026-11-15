@@ -1,1 +1,5 @@
-{"screenshots":[{"file":"1-board.jpg","route":"#/","viewport":{"width":1280,"height":900}},{"file":"2-bounty.jpg","route":"#/bounty/makefun-frontend-01","viewport":{"width":1280,"height":900}},{"file":"3-leaderboard.jpg","route":"#/bounty/makefun-frontend-01/leaderboard","viewport":{"width":1280,"height":900}}]}
+[
+  {"file":"1-board.png","path":"#/","viewport":{"width":1280,"height":1000}},
+  {"file":"2-bounty.png","path":"#/bounty/makefun-frontend-01","viewport":{"width":1280,"height":1000}},
+  {"file":"3-leaderboard.png","path":"#/bounty/tiny-chess-01/leaderboard","viewport":{"width":1280,"height":1000}}
+]
