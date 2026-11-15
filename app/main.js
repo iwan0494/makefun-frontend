@@ -1,5 +1,5 @@
 import {bounties,bounty,leaderboard,profile} from './api.js';
-const markShotReady=value=>{document.documentElement.dataset.shotReady=String(value);const script=document.createElement('script');script.textContent=`window.__shotReady=${JSON.stringify(value)};`;document.documentElement.append(script);script.remove();};
+const markShotReady=value=>{window.__shotReady=value;document.documentElement.dataset.shotReady=String(value);};
 markShotReady(false);const app=document.querySelector('#app');let all=[],filter='all',query='',page=1,routeToken=0;
 const PAGE_SIZE=12;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -16,7 +16,7 @@ function renderBoard(){
   const filtered=all.filter(b=>filter==='soon'?true:filter==='free'?b.entryFeeUsd==null||Number(b.entryFeeUsd)===0:true).filter(b=>`${b.title} ${b.slug} ${b.sponsor?.name||''} ${b.category||''}`.toLowerCase().includes(query.toLowerCase()));
   if(filter==='soon')filtered.sort((a,b)=>Date.parse(a.deadline)-Date.parse(b.deadline));
   const pages=Math.max(1,Math.ceil(filtered.length/PAGE_SIZE));page=Math.min(page,pages);const rows=filtered.slice((page-1)*PAGE_SIZE,page*PAGE_SIZE);
-  app.innerHTML=`<section class="hero"><div class="eyebrow"><span>THE LIVE CHALLENGE INDEX</span><span>FIELD REPORT / ${new Date().toISOString().slice(0,16).replace('T',' ')} UTC</span></div><h1>Find a challenge.<br><em>Make your mark.</em></h1><p>Open calls, real prize pools, and the clock that matters. Pick a lane and get to work.</p><div class="hero-stamp"><span>№</span><strong>01</strong><small>LIVE<br>BOARD</small></div></section>
+  app.innerHTML=`<section class="hero"><h1>Build the best make.fun frontend</h1></section>
   <section class="stats"><div><small>ACCEPTING ENTRIES</small><strong>${nowOpen.length.toString().padStart(2,'0')}</strong><span>active deadlines</span></div><div><small>LIVE POT / USD</small><strong>${money(pot)}</strong><span>across open calls</span></div><div><small>CLOSING IN 48H</small><strong>${soon.length.toString().padStart(2,'0')}</strong><span>make it count</span></div><div class="stats-note"><span class="signal"></span><b>LIVE INDEX</b><small>Public API · GET only</small></div></section>
   <section class="board"><div class="section-head"><div><div class="eyebrow">01 / OPPORTUNITY REGISTER</div><h2>Open bounties <sup>${filtered.length}</sup></h2></div><label class="search"><span class="search-icon" aria-hidden="true"></span><input id="search" type="search" placeholder="Search title, sponsor, category…" value="${esc(query)}"><kbd> / </kbd></label></div>
   <div class="controls"><div class="filters"><button data-filter="all" class="${filter==='all'?'active':''}">All bounties <i>${all.length}</i></button><button data-filter="soon" class="${filter==='soon'?'active':''}">Closing soon</button><button data-filter="free" class="${filter==='free'?'active':''}">Free entry</button></div><span class="sort-note">SORTED BY DEADLINE <span>↓</span></span></div>
