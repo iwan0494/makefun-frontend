@@ -1,5 +1,1 @@
-[
-  { "file": "1-board.jpg", "path": "#/", "viewport": { "width": 1280, "height": 900 } },
-  { "file": "2-bounty.jpg", "path": "#/bounty/makefun-frontend-01", "viewport": { "width": 1280, "height": 900 } },
-  { "file": "3-leaderboard.jpg", "path": "#/leaderboard/makefun-frontend-01", "viewport": { "width": 1280, "height": 900 } }
-]
+{"screenshots":[{"file":"1-board.jpg","route":"#/","viewport":{"width":1280,"height":900}},{"file":"2-bounty.jpg","route":"#/bounty/makefun-frontend-01","viewport":{"width":1280,"height":900}},{"file":"3-leaderboard.jpg","route":"#/bounty/makefun-frontend-01/leaderboard","viewport":{"width":1280,"height":900}}]}
