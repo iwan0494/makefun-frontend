@@ -137,7 +137,9 @@ tbody td{padding:7px 9px;font-size:13px}
 .profile-table tbody td{padding-top:8px;padding-bottom:8px}
 .time-pill{font-size:11px}
 .entry-row span,.links a{font-size:13px}
+.hero .eyebrow{padding-right:145px}
 @media(max-width:760px){
+ .hero .eyebrow{padding-right:0}
  .hero{padding:15px 0 13px}
  .hero .eyebrow{font-size:11px}
  .hero h1{font-size:37px;margin:8px 0 5px}
