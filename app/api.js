@@ -17,9 +17,14 @@ export async function get(path){
   }
 }
 export async function bounties(){
-  let cursor='',all=[],pages=0;
-  do{const q=new URLSearchParams({status:'open',activity:'times',limit:'100'});if(cursor)q.set('cursor',cursor);const data=await get('/competitions?'+q);all.push(...(data.items||[]));cursor=data.next_cursor||'';pages++;}while(cursor&&pages<8);
-  return all;
+  async function byStatus(status){
+    let cursor='',all=[],pages=0;
+    do{const q=new URLSearchParams({status,activity:'times',limit:'100'});if(cursor)q.set('cursor',cursor);const data=await get('/competitions?'+q);all.push(...(data.items||[]));cursor=data.next_cursor||'';pages++;}while(cursor&&pages<8);
+    return all;
+  }
+  const [open,resolved]=await Promise.allSettled([byStatus('open'),byStatus('resolved')]);
+  if(open.status==='rejected'&&resolved.status==='rejected')throw open.reason;
+  return [...(open.status==='fulfilled'?open.value:[]),...(resolved.status==='fulfilled'?resolved.value:[])];
 }
 export const bounty=slug=>get('/competitions/'+encodeURIComponent(slug)+'?submissions=summary');
 export const leaderboard=slug=>get('/competitions/'+encodeURIComponent(slug)+'/leaderboard?rows=first');
