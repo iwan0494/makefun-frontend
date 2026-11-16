@@ -1,1 +1,7 @@
-[{"file":"1-board.png","path":"#/","viewport":{"width":1280,"height":900}},{"file":"2-bounty.png","path":"#/bounty/makefun-frontend-01","viewport":{"width":1152,"height":820}},{"file":"3-leaderboard.png","path":"#/leaderboard/makefun-frontend-01","viewport":{"width":1280,"height":1150}}]
+{
+  "screenshots": [
+    { "file": "screenshots/1-board.jpg", "route": "#/", "cover": true, "description": "Split view: open bounties beside the live top ten, with an obvious red Resolved filter." },
+    { "file": "screenshots/2-bounty.jpg", "route": "#/bounty/makefun-frontend-01", "description": "Full bounty rewards, dates and the live top ten." },
+    { "file": "screenshots/3-leaderboard.jpg", "route": "#/bounty/makefun-frontend-01/leaderboard", "description": "Full ranked entries and judge win rates." }
+  ]
+}
