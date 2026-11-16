@@ -1,5 +1,1 @@
-[
-  {"file":"1-board.png","path":"#/","viewport":{"width":1280,"height":1000}},
-  {"file":"2-bounty.png","path":"#/bounty/makefun-frontend-01","viewport":{"width":1280,"height":1000}},
-  {"file":"3-leaderboard.png","path":"#/bounty/tiny-chess-01/leaderboard","viewport":{"width":1280,"height":1000}}
-]
+[{"file":"1-board.png","path":"#/","viewport":{"width":1280,"height":900}},{"file":"2-bounty.png","path":"#/bounty/makefun-frontend-01","viewport":{"width":1152,"height":820}},{"file":"3-leaderboard.png","path":"#/leaderboard/makefun-frontend-01","viewport":{"width":1280,"height":1150}}]
