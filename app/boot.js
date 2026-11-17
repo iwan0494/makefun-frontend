@@ -1,3 +1,1 @@
-const app = document.querySelector('#app');
-app.setAttribute('aria-live', 'polite');
-import('./views.js').then(({ start }) => start(app)).catch(() => { app.textContent = 'The live board could not be opened. Please refresh.'; });
+import('./main.js').catch(() => { document.querySelector('#app').innerHTML = '<main class="error">Nightboard could not load. Check your connection and refresh.</main>'; });
